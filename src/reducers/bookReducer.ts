@@ -1,7 +1,7 @@
 import { ActionTypes } from "../actions/type";
 import { bookState } from "../types";
 
-const initialState: bookState = {
+export const initialState: bookState = {
   books: null,
 };
 
