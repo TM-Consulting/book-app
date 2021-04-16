@@ -1,15 +1,15 @@
-import { ADD_TASK } from "../actions/type";
+import { ActionTypes } from "../actions/type";
+import { bookState } from "../types";
 
-const initialState = {
-  tasks: [],
+const initialState: bookState = {
+  books: null,
 };
 
-export default function (state = initialState, action) {
+export default function (state: bookState = initialState, action: any) {
   switch (action.type) {
-    case ADD_TASK:
-      //console.log("testt",state)
+    case ActionTypes.LIST_BOOK:
       return {
-        tasks: [...state.tasks, action.payload],
+        books: action.payload,
       };
 
     default:
