@@ -8,6 +8,13 @@ export const addBook = (payload: bookData) => {
   };
 };
 
+export const addBooks = (payload: bookData[]) => {
+    return {
+      type: ActionTypes.ADD_BOOKS,
+      payload,
+    };
+  };
+
 export const ListBook = (payload: bookData[]) => {
     return {
       type: ActionTypes.LIST_BOOK,

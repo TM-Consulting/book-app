@@ -1,32 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CustomForm from "../../components/CustomForm";
 import { Container } from "react-bootstrap";
 import CustomCard from "../../components/CustomCard";
 import "./index.css";
+import { createStructuredSelector } from "reselect";
+import { makeSelectBooks } from "../../selectors/bookSelector";
+import { useSelector } from "react-redux";
+import { bookData } from "../../types";
+const booksState = createStructuredSelector({
+  books: makeSelectBooks(),
+});
 const Home = () => {
-  const books = [
-    {
-      title: "ANtikhristos",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas officia, totam laboriosam tempore corporis asperiores perspiciatis iure, possimus corrupti rem cumque repellat eius. Inventore saepe minima expedita, facere nobis et.",
-    },
-    {
-      title: "BZ",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas officia, totam laboriosam tempore corporis asperiores perspiciatis iure, possimus corrupti rem cumque repellat eius. Inventore saepe minima expedita, facere nobis et.",
-    },
-    {
-      title: "AHMED_MOVICH",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas officia, totam laboriosam tempore corporis asperiores perspiciatis iure, possimus corrupti rem cumque repellat eius. Inventore saepe minima expedita, facere nobis et.",
-    },
-  ];
+  const { books } = useSelector(booksState);
+
   return (
     <Container>
       <div className="App">
+        {console.log("testttt", books)}
         <CustomForm />
         <div className="border_Box">
-          {books.map((item) => (
+          {books.map((item:bookData) => (
             <CustomCard
               title={item.title}
               description={item.description}

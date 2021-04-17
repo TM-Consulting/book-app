@@ -1,13 +1,16 @@
+interface globalState {
+  readonly booksStateFE: bookState;
+}
 interface bookState {
-  books: bookData[] | null;
+  readonly books: bookData[] | [];
 }
 
 interface bookData {
   readonly title: string;
   readonly description: string;
   readonly id: number;
-  readonly created_at: string;
-  readonly updated_at: string;
+  readonly created_at?: string;
+  readonly updated_at?: string;
 }
 
-export { bookData, bookState };
+export { bookData, bookState, globalState };

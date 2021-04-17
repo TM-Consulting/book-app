@@ -1,11 +1,15 @@
 import { initialState } from "../reducers/bookReducer";
 import { createSelector } from "reselect";
-import { bookState } from "../types";
+import { bookData, bookState, globalState } from "../types";
 
-const selectBookDomain = (state: bookState) => initialState;
+const selectBookDomain = (bkstate: globalState): bookState =>
+  bkstate.booksStateFE || initialState;
+
 const makeSelectBooks = () =>
-  createSelector(selectBookDomain, (book) =>
-    book && "books" in book ? book.books : []
+  createSelector<globalState, bookState, bookData[]>(
+    selectBookDomain,
+    (booksdata: bookState) =>
+      booksdata && "books" in booksdata ? booksdata.books : []
   );
 
-export { makeSelectBooks };
+export { makeSelectBooks, selectBookDomain };
