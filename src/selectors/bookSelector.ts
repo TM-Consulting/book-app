@@ -6,10 +6,8 @@ const selectBookDomain = (bkstate: globalState): bookState =>
   bkstate.booksStateFE || initialState;
 
 const makeSelectBooks = () =>
-  createSelector<globalState, bookState, bookData[]>(
-    selectBookDomain,
-    (booksdata: bookState) =>
-      booksdata && "books" in booksdata ? booksdata.books : []
+  createSelector(selectBookDomain, (booksdata: bookState) =>
+    booksdata && "books" in booksdata ? booksdata.books : []
   );
 
 export { makeSelectBooks, selectBookDomain };

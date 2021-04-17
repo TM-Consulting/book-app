@@ -1,3 +1,4 @@
+import { getAllBooks } from "../services/bookService";
 import { bookData } from "../types";
 import { ActionTypes } from "./type";
 
@@ -8,16 +9,17 @@ export const addBook = (payload: bookData) => {
   };
 };
 
-export const addBooks = (payload: bookData[]) => {
-    return {
-      type: ActionTypes.ADD_BOOKS,
-      payload,
-    };
+export const addBooks = async () => {
+  const data = await getAllBooks();
+  return {
+    type: ActionTypes.ADD_BOOKS,
+    payload: data,
   };
+};
 
 export const ListBook = (payload: bookData[]) => {
-    return {
-      type: ActionTypes.LIST_BOOK,
-      payload,
-    };
+  return {
+    type: ActionTypes.LIST_BOOK,
+    payload,
   };
+};

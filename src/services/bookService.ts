@@ -1,8 +1,9 @@
 import axios from "axios";
 
+const backEndUrl = process.env.REACT_APP_BACKEND_URL;
 
-export const getALBooks = async () => {
-  await axios.get(`/books`).then((res) => {
-    const books = res.data;
+export const getAllBooks = async () => {
+  await axios.get(`${backEndUrl}/books`).then((res) => {
+    return res.data;
   });
 };
