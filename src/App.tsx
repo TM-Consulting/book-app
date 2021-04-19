@@ -6,17 +6,24 @@ import Home from "./pages/Home";
 import { addBooks } from "./actions/bookActions";
 import { useDispatch } from "react-redux";
 import Details from "./pages/Details";
+import { getAllBooks } from "./services/bookService";
 
 const App = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(addBooks());
+    async function fetchMyAPI() {
+      const data =  await getAllBooks();
+       dispatch(addBooks(data));
+    }
+
+    fetchMyAPI();
   }, []);
   return (
     <Router>
       <div>
         <Switch>
-          <Route path="/">
+          <Route path="/" exact>
             <Home />
           </Route>
           <Route path="/details/:id" exact>

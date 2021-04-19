@@ -9,8 +9,8 @@ export const addBook = (payload: bookData) => {
   };
 };
 
-export const addBooks = async () => {
-  const data = await getAllBooks();
+export const addBooks = (data:bookData[]) => {
+
   return {
     type: ActionTypes.ADD_BOOKS,
     payload: data,
