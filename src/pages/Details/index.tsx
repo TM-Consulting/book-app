@@ -1,4 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, {
+  useState,
+  useEffect,
+  MouseEventHandler,
+  ChangeEventHandler,
+} from "react";
 import CustomForm from "../../components/CustomForm";
 import { Container } from "react-bootstrap";
 import CustomCard from "../../components/CustomCard";
@@ -12,6 +17,13 @@ import { Button, Card } from "react-bootstrap";
 import "./index.css";
 import { getBook } from "../../services/bookService";
 const Details = () => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
+  const handleChange = (e: string) => {
+    console.log("event tt", e);
+  };
+  const handleClick = () => {};
   const { id } = useParams<{ id: string }>();
   const currentID = id;
   const [show, setShow] = useState(false);
@@ -33,7 +45,14 @@ const Details = () => {
   return (
     <Container>
       <div className="App">
-        {show && <CustomForm />}
+        {/* {show && (
+          <CustomForm
+            title={title}
+            description={description}
+            handleChange={handleChange}
+            handleClick={handleClick}
+          />
+        )} */}
         <CustomCard
           title={currentBook.title}
           description={currentBook.description}

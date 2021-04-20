@@ -1,5 +1,5 @@
 import axios from "axios";
-import { bookData } from "../types";
+import { bookData, bookDataSent } from "../types";
 
 const backEndUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -25,4 +25,10 @@ export const getBook = async (id: string) => {
     return mydata;
   });
   return mydata;
+};
+
+export const addBook = async (data: bookDataSent) => {
+  await axios.post(`${backEndUrl}/api/books/`, data).then((res) => {
+    console.log("added");
+  });
 };
