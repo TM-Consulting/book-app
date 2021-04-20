@@ -15,8 +15,7 @@ const Home = () => {
   const history = useHistory();
   const { books } = useSelector(booksState);
   const myClick = (e: number) => {
-    history.push(`details/${e}`)
-
+    history.push(`details/${e}`);
   };
   return (
     <Container>
