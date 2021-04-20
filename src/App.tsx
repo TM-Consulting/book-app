@@ -9,16 +9,6 @@ import Details from "./pages/Details";
 import { getAllBooks } from "./services/bookService";
 
 const App = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    async function fetchMyAPI() {
-      const data =  await getAllBooks();
-       dispatch(addBooks(data));
-    }
-
-    fetchMyAPI();
-  }, []);
   return (
     <Router>
       <div>

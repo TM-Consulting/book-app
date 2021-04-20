@@ -12,5 +12,10 @@ interface bookData {
   readonly created_at?: string;
   readonly updated_at?: string;
 }
+interface bookDataSent {
+  readonly title: string;
+  readonly description: string;
 
-export { bookData, bookState, globalState };
+}
+
+export { bookData, bookState, globalState,bookDataSent };
