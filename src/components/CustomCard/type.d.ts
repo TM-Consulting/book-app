@@ -1,5 +1,5 @@
 interface CustomCardProps {
-  title: string;  // add ?
+  title: string; // add ?
   description: string;
-  handleClick: () => void;
+  handleClick: (e: MouseEventHandler) => void;
 }

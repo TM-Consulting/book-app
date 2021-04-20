@@ -9,7 +9,7 @@ const index = ({ title, description, handleClick }: CustomCardProps) => {
           <Card.Title>{title}</Card.Title>
           <Card.Text>{description}</Card.Text>
           <Button variant="primary" onClick={handleClick}>
-            update
+            more ...
           </Button>
         </Card.Body>
       </Card>
