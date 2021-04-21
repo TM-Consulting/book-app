@@ -80,6 +80,7 @@ const Details = ({ handleRerunder }: DetailsProps) => {
       <div className="App">
         {show && (
           <CustomForm
+            showSearch={false}
             btnLabel="Update"
             title={title}
             description={description}

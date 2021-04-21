@@ -60,6 +60,7 @@ const Home = ({ handleRerunder }: HomeProps) => {
     <Container>
       <div className="App">
         <CustomForm
+          showSearch={true}
           title={title}
           description={description}
           handleChange={handleChange}
