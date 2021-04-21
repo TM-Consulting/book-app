@@ -5,29 +5,17 @@ import CustomCard from "../../components/CustomCard";
 import "./index.css";
 import { createStructuredSelector } from "reselect";
 import { makeSelectBooks } from "../../selectors/bookSelector";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { bookData } from "../../types";
 import { useHistory } from "react-router-dom";
-import { addBook, getAllBooks } from "../../services/bookService";
-import { addBooks } from "../../actions/bookActions";
-
+import { addBook } from "../../services/bookService";
 const booksState = createStructuredSelector({
   books: makeSelectBooks(),
 });
-const Home = () => {
+const Home = ({ handleRerunder }: HomeProps) => {
   const [title, setTitle] = useState("");
-  const [rerender, setRerender] = useState(false);
+
   const [description, setDescription] = useState("");
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    async function fetchMyAPI() {
-      const data = await getAllBooks();
-      dispatch(addBooks(data));
-    }
-
-    fetchMyAPI();
-  }, [rerender]);
 
   const handleChange = (e: any) => {
     switch (e.target.id) {
@@ -41,11 +29,13 @@ const Home = () => {
         break;
     }
   };
-  const handleClick = (e: any) => {
+  const handleClick = async (e: any) => {
     e.preventDefault();
     if (title && description) {
-      addBook({ title: title, description: description });
-      setRerender(!rerender);
+      await addBook({ title: title, description: description });
+      setDescription("");
+      setTitle("");
+      handleRerunder();
     }
   };
   const history = useHistory();

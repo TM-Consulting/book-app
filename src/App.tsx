@@ -9,12 +9,25 @@ import Details from "./pages/Details";
 import { getAllBooks } from "./services/bookService";
 
 const App = () => {
+  const dispatch = useDispatch();
+  async function fetchMyAPI() {
+    const data = await getAllBooks();
+    data.reverse()
+    dispatch(addBooks(data));
+  }
+
+  useEffect(() => {
+    fetchMyAPI();
+  }, []);
+  const handleRerunder = () => {
+    fetchMyAPI();
+  };
   return (
     <Router>
       <div>
         <Switch>
           <Route path="/" exact>
-            <Home />
+            <Home handleRerunder={handleRerunder} />
           </Route>
           <Route path="/details/:id" exact>
             <Details />
