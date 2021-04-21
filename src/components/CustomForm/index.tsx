@@ -6,6 +6,7 @@ const index = ({
   description,
   btnLabel,
   search,
+  showSearch,
   handleClick,
   handleChange,
   handleSearch,
@@ -13,14 +14,16 @@ const index = ({
   return (
     <div>
       <Form>
-        <Form.Control
-          style={{ marginTop: "40px" }}
-          type="text"
-          placeholder="Search"
-          className="mr-sm-2"
-          value={search}
-          onChange={handleSearch}
-        />
+        {showSearch && (
+          <Form.Control
+            style={{ marginTop: "40px" }}
+            type="text"
+            placeholder="Search"
+            className="mr-sm-2"
+            value={search}
+            onChange={handleSearch}
+          />
+        )}
         <div className="border_Box">
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Title</Form.Label>
