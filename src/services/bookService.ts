@@ -28,7 +28,21 @@ export const getBook = async (id: string) => {
 };
 
 export const addBook = async (data: bookDataSent) => {
-  await axios.post(`${backEndUrl}/api/books/`, data).then((res) => {
-    console.log("added");
+  await axios.post(`${backEndUrl}/api/books/`, data).then((res) => {});
+};
+
+export const removeBook = async (id: string) => {
+  await axios.delete(`${backEndUrl}/api/books/${id}`);
+};
+
+export const updateBook = async (id: string, data: bookDataSent) => {
+  await axios.put(`${backEndUrl}/api/books/${id}`, data);
+};
+export const searchBook = async (id: string) => {
+  var mydata: bookData[] = [];
+  await axios.get(`${backEndUrl}/api/books/search/${id}`).then((res) => {
+    mydata = res.data;
+    return mydata;
   });
+  return mydata;
 };

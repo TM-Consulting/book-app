@@ -12,7 +12,7 @@ const App = () => {
   const dispatch = useDispatch();
   async function fetchMyAPI() {
     const data = await getAllBooks();
-    data.reverse()
+    data.reverse();
     dispatch(addBooks(data));
   }
 
@@ -30,7 +30,7 @@ const App = () => {
             <Home handleRerunder={handleRerunder} />
           </Route>
           <Route path="/details/:id" exact>
-            <Details />
+            <Details handleRerunder={handleRerunder} />
           </Route>
         </Switch>
       </div>
