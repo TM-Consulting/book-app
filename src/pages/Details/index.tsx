@@ -19,7 +19,7 @@ import { getBook, removeBook, updateBook } from "../../services/bookService";
 const Details = ({ handleRerunder }: DetailsProps) => {
   const [title, setTitle] = useState("");
   const [rerender, setRerender] = useState(false);
-
+  const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
   const { id } = useParams<{ id: string }>();
   const currentID = id;
@@ -31,6 +31,9 @@ const Details = ({ handleRerunder }: DetailsProps) => {
       case "description":
         setDescription(e.target.value);
         break;
+      case "upload":
+        setImage(e.target.files[0]);
+        break;
       default:
         break;
     }
@@ -38,9 +41,14 @@ const Details = ({ handleRerunder }: DetailsProps) => {
   const handleClick = async (e: any) => {
     e.preventDefault();
     if (title && description) {
-      await updateBook(currentID, { title: title, description: description });
+      let fd = new FormData();
+      fd.append("image", image);
+      fd.append("description", description);
+      fd.append("title", title);
+      await updateBook(currentID, fd);
       setDescription("");
       setTitle("");
+      setImage("");
       handleRerunder();
       setRerender(!rerender);
       setShow(false);
@@ -89,6 +97,7 @@ const Details = ({ handleRerunder }: DetailsProps) => {
           />
         )}
         <CustomCard
+          imgUrl={currentBook.image}
           showBtn={false}
           title={currentBook.title}
           description={currentBook.description}
