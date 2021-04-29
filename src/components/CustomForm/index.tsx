@@ -4,6 +4,7 @@ import { Button, Form } from "react-bootstrap";
 const index = ({
   title,
   description,
+  image,
   btnLabel,
   search,
   showSearch,
@@ -45,6 +46,14 @@ const index = ({
               id="description"
               value={description}
               onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.File
+              id="upload"
+              label="Example file input"
+              onChange={handleChange}
+              value={image}
             />
           </Form.Group>
           <Button variant="primary" type="button" onClick={handleClick}>

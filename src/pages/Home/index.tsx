@@ -17,6 +17,7 @@ const Home = ({ handleRerunder }: HomeProps) => {
   const [title, setTitle] = useState("");
   const [search, setSearch] = useState("");
   const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
 
   const handleChange = (e: any) => {
     switch (e.target.id) {
@@ -26,6 +27,9 @@ const Home = ({ handleRerunder }: HomeProps) => {
       case "description":
         setDescription(e.target.value);
         break;
+      case "upload":
+        setImage(e.target.files[0]);
+        break;
       default:
         break;
     }
@@ -33,9 +37,14 @@ const Home = ({ handleRerunder }: HomeProps) => {
   const handleClick = async (e: any) => {
     e.preventDefault();
     if (title && description) {
-      await addBook({ title: title, description: description });
+      let fd = new FormData();
+      fd.append("image", image);
+      fd.append("description", description);
+      fd.append("title", title);
+      await addBook(fd);
       setDescription("");
       setTitle("");
+      setImage("");
       handleRerunder();
     }
   };
@@ -71,6 +80,7 @@ const Home = ({ handleRerunder }: HomeProps) => {
         <div className="border_Box">
           {books.map((item: bookData) => (
             <CustomCard
+              imgUrl={item?.image}
               showBtn={true}
               title={item.title}
               description={item.description}

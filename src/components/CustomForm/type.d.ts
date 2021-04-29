@@ -1,6 +1,7 @@
 interface CustomFormProps {
   title: string;
   description: string;
+  image?: string;
   btnLabel: string;
   search?: string;
   showSearch: boolean;
