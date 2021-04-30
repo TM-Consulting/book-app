@@ -36,7 +36,7 @@ export const removeBook = async (id: string) => {
 };
 
 export const updateBook = async (id: string, data: FormData) => {
-  await axios.put(`${backEndUrl}/api/books/${id}`, data);
+  await axios.post(`${backEndUrl}/api/books/${id}`, data);
 };
 export const searchBook = async (id: string) => {
   var mydata: bookData[] = [];
