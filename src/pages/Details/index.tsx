@@ -45,6 +45,8 @@ const Details = ({ handleRerunder }: DetailsProps) => {
       fd.append("image", image);
       fd.append("description", description);
       fd.append("title", title);
+      fd.append("_method", "PUT")
+
       await updateBook(currentID, fd);
       setDescription("");
       setTitle("");
