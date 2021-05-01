@@ -99,7 +99,7 @@ const Details = ({ handleRerunder }: DetailsProps) => {
           />
         )}
         <CustomCard
-          imgUrl={currentBook.image}
+          imgUrl={currentBook?.image_id}
           showBtn={false}
           title={currentBook.title}
           description={currentBook.description}
