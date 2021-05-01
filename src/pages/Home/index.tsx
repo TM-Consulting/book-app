@@ -80,7 +80,7 @@ const Home = ({ handleRerunder }: HomeProps) => {
         <div className="border_Box">
           {books.map((item: bookData) => (
             <CustomCard
-              imgUrl={item?.image}
+              imgUrl={item?.image_id}
               showBtn={true}
               title={item.title}
               description={item.description}
