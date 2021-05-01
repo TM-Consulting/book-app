@@ -5,6 +5,7 @@ interface CustomFormProps {
   btnLabel: string;
   search?: string;
   showSearch: boolean;
+  progress?: number | null;
 
   handleClick: (e: any) => void;
   handleChange: (e: any) => void;

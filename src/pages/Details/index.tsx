@@ -16,12 +16,16 @@ import { bookData } from "../../types";
 import { Button, Card } from "react-bootstrap";
 import "./index.css";
 import { getBook, removeBook, updateBook } from "../../services/bookService";
+import axios from "axios";
 const Details = ({ handleRerunder }: DetailsProps) => {
   const [title, setTitle] = useState("");
   const [rerender, setRerender] = useState(false);
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
+  const [progress, setProgress] = useState<number | null>();
   const { id } = useParams<{ id: string }>();
+  const backEndUrl = process.env.REACT_APP_BACKEND_URL;
+
   const currentID = id;
   const handleChange = (e: any) => {
     switch (e.target.id) {
@@ -40,24 +44,31 @@ const Details = ({ handleRerunder }: DetailsProps) => {
   };
   const handleClick = async (e: any) => {
     e.preventDefault();
-    if (title && description) {
+    if (title && description && image) {
       let fd = new FormData();
       fd.append("image", image);
       fd.append("description", description);
       fd.append("title", title);
-      fd.append("_method", "PUT")
+      fd.append("_method", "PUT");
 
-      await updateBook(currentID, fd);
+      await axios.post(`${backEndUrl}/api/books/${currentID}`, fd, {
+        onUploadProgress: (data) => {
+          setProgress(Math.round((100 * data.loaded) / data.total));
+        },
+      });
       setDescription("");
       setTitle("");
       setImage("");
       handleRerunder();
       setRerender(!rerender);
       setShow(false);
+      setProgress(null);
+
     }
   };
 
   const [show, setShow] = useState(false);
+
   const [currentBook, setCurrentBook] = useState<bookData>({
     title: "",
     description: "",
@@ -96,6 +107,7 @@ const Details = ({ handleRerunder }: DetailsProps) => {
             description={description}
             handleChange={handleChange}
             handleClick={handleClick}
+            progress={progress}
           />
         )}
         <CustomCard

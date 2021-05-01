@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, ProgressBar } from "react-bootstrap";
 
 const index = ({
   title,
@@ -8,6 +8,7 @@ const index = ({
   btnLabel,
   search,
   showSearch,
+  progress,
   handleClick,
   handleChange,
   handleSearch,
@@ -54,7 +55,11 @@ const index = ({
               label="Example file input"
               onChange={handleChange}
               value={image}
+              style={{ marginBottom: "40px" }}
             />
+            {progress && progress > 0 && (
+              <ProgressBar now={progress} label={`${progress}%`} />
+            )}
           </Form.Group>
           <Button variant="primary" type="button" onClick={handleClick}>
             {btnLabel}

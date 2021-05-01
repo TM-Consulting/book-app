@@ -28,7 +28,8 @@ export const getBook = async (id: string) => {
 };
 
 export const addBook = async (data: FormData) => {
-  await axios.post(`${backEndUrl}/api/books/`, data).then((res) => {});
+  await axios
+    .post(`${backEndUrl}/api/books/`, data, { onUploadProgress: (data) => {} });
 };
 
 export const removeBook = async (id: string) => {
