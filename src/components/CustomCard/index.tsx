@@ -8,10 +8,24 @@ const index = ({
   imgUrl,
   handleClick,
 }: CustomCardProps) => {
+  const imgOrVideo = () => {
+    const list_len = imgUrl ? imgUrl.split("/") : [];
+    const item = list_len[list_len.length - 1];
+    if (item) {
+      if (item.includes("jpg") || item.includes("png")) return false;
+      else return true;
+    } else return false;
+  };
   return (
     <div>
       <Card className="flex" style={{ width: "100%", marginTop: "20px" }}>
-        <Card.Img className="header_img" variant="top" src={imgUrl} />
+        {imgOrVideo() ? (
+          <video className="header_img" width="320" height="240" controls>
+            <source src={imgUrl} type="video/mp4" />
+          </video>
+        ) : (
+          <Card.Img className="header_img" variant="top" src={imgUrl} />
+        )}
         <Card.Body>
           <Card.Title>{title}</Card.Title>
           <Card.Text>{description}</Card.Text>
