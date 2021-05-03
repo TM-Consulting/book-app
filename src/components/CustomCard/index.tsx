@@ -12,7 +12,7 @@ const index = ({
     const list_len = imgUrl ? imgUrl.split("/") : [];
     const item = list_len[list_len.length - 1];
     if (item) {
-      if (item.includes("jpg")) return false;
+      if (item.includes("jpg") || item.includes("png")) return false;
       else return true;
     } else return false;
   };
@@ -20,7 +20,7 @@ const index = ({
     <div>
       <Card className="flex" style={{ width: "100%", marginTop: "20px" }}>
         {imgOrVideo() ? (
-          <video className="header_img"  width="320" height="240" controls>
+          <video className="header_img" width="320" height="240" controls>
             <source src={imgUrl} type="video/mp4" />
           </video>
         ) : (
