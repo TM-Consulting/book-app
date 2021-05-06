@@ -7,6 +7,8 @@ import { addBooks } from "./actions/bookActions";
 import { useDispatch } from "react-redux";
 import Details from "./pages/Details";
 import { getAllBooks } from "./services/bookService";
+import SignIn from './pages/SignIn'
+import CreateAccount from './pages/CreatAccount'
 
 const App = () => {
   const dispatch = useDispatch();
@@ -31,6 +33,12 @@ const App = () => {
           </Route>
           <Route path="/details/:id" exact>
             <Details handleRerunder={handleRerunder} />
+          </Route>
+          <Route path="/signin" exact>
+            <SignIn />
+          </Route>
+          <Route path="/signup" exact>
+            <CreateAccount/>
           </Route>
         </Switch>
       </div>
