@@ -1,0 +1,29 @@
+.sign_container{
+      border: 1px solid gray;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 40px;
+      padding: 40px;
+      width: 500px;
+      display: flex;
+      flex-direction: column; 
+}
+
+.button{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-top: 20px;
+}
+
+.sign_form{
+      display: flex;
+      flex-direction: column;
+      justify-items: center;
+}
+.sign_up{
+      margin-top: 10px;
+}
+.sign_up:hover{
+      text-decoration: none;
+}
