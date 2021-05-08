@@ -21,6 +21,7 @@ const Home = ({ handleRerunder }: HomeProps) => {
   const [image, setImage] = useState("");
   const [progress, setProgress] = useState<number | null>();
   const backEndUrl = process.env.REACT_APP_BACKEND_URL;
+  
   const handleChange = (e: any) => {
     switch (e.target.id) {
       case "title":

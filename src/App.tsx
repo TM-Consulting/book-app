@@ -7,10 +7,9 @@ import { addBooks } from "./actions/bookActions";
 import { useDispatch } from "react-redux";
 import Details from "./pages/Details";
 import { getAllBooks } from "./services/bookService";
-import Login from "./pages/Login";
-import Register from "./pages/Register"
+import SignIn from './pages/SignIn'
+import CreateAccount from './pages/CreatAccount'
 import Dashbord from "./pages/Dashbord";
-
 const App = () => {
   const dispatch = useDispatch();
   async function fetchMyAPI() {
@@ -35,13 +34,13 @@ const App = () => {
           <Route path="/details/:id" exact>
             <Details handleRerunder={handleRerunder} />
           </Route>
-          <Route path="/login" exact>
-            <Login />
+          <Route path="/signin" exact>
+            <SignIn />
           </Route>
-          <Route path="/register" exact>
-            <Register />
+          <Route path="/signup" exact>
+            <CreateAccount />
           </Route>
-          <Route path="/dashbord" exact>
+           <Route path="/dashboard" exact>
             <Dashbord />
           </Route>
         </Switch>
