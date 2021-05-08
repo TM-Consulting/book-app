@@ -5,6 +5,7 @@ const index = ({
   name,
   email,
   city,
+  enable,
   handleChange,
   handleClick,
 }: ProfileFormProps) => {
@@ -14,12 +15,12 @@ const index = ({
         <Form.Row>
           <Form.Group as={Col} controlId="formGridEmail">
             <Form.Label>Name</Form.Label>
-            <Form.Control type="text" placeholder="name" value={name} onChange={handleChange} />
+            <Form.Control type="text" placeholder="name" value={name} onChange={handleChange} disabled={enable}/>
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridPassword">
             <Form.Label>Email</Form.Label>
-            <Form.Control type="Email" placeholder="Email" value={email} onChange={handleChange} />
+            <Form.Control type="Email" placeholder="Email" value={email} onChange={handleChange} disabled={enable} />
           </Form.Group>
         </Form.Row>
 

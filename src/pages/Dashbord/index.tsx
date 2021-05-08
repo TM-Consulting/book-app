@@ -7,7 +7,7 @@ const index = () => {
   return (
     <div className="container">
       <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-        <Tab eventKey="profiles" title="Profile">
+        <Tab eventKey="profile" title="Profile">
           <Profile name={"Mohamed Bataoui"} email={"Mohamed.bataoui@gmail.com"} city={"Mohammedia"} handleChange={() => { }} handleClick={() => { }} />
         </Tab>
         <Tab eventKey="home" title="Home">
