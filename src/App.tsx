@@ -9,7 +9,7 @@ import Details from "./pages/Details";
 import { getAllBooks } from "./services/bookService";
 import SignIn from './pages/SignIn'
 import CreateAccount from './pages/CreatAccount'
-
+import Dashbord from "./pages/Dashbord";
 const App = () => {
   const dispatch = useDispatch();
   async function fetchMyAPI() {
@@ -38,7 +38,10 @@ const App = () => {
             <SignIn />
           </Route>
           <Route path="/signup" exact>
-            <CreateAccount/>
+            <CreateAccount />
+          </Route>
+           <Route path="/dashboard" exact>
+            <Dashbord />
           </Route>
         </Switch>
       </div>
