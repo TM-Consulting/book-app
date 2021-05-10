@@ -5,4 +5,6 @@ export enum ActionTypes {
   UPDATE_BOOK = "UPDATE_BOOK",
   GET_BOOK = "GET_BOOK",
   LIST_BOOK = "LIST_BOOK",
+
+  ADD_USER = "ADD_USER",
 }

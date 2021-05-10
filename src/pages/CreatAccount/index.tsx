@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
+import { addUser } from "../../services/userService";
 
 import "./index.css";
 
 const CreateAccount = () => {
+  const history = useHistory();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,8 +38,14 @@ const CreateAccount = () => {
       fd.append("name", name);
       fd.append("email", email);
       fd.append("password", password);
-      fd.append("confirm", confirm);
-      fd.append("_method", "post");
+      fd.append("password_confirmation", confirm);
+      await addUser(fd)
+        .then((res) => {
+          history.push("/signin");
+        })
+        .catch((e) => {
+          alert("error");
+        });
     }
   };
 
@@ -46,9 +54,9 @@ const CreateAccount = () => {
       <div className="createAccount_container">
         <h5>Create your Account</h5>
         <Form className="createAccount_form">
-        <Form.Group controlId="formBasicName">
-        <Form.Label>Full Name</Form.Label>
-        <Form.Control
+          <Form.Group controlId="formBasicName">
+            <Form.Label>Full Name</Form.Label>
+            <Form.Control
               type="name"
               placeholder="name"
               id="name"
