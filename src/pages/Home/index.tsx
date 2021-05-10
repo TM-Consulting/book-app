@@ -44,7 +44,7 @@ const Home = ({ handleRerunder }: HomeProps) => {
       fd.append("image", image);
       fd.append("description", description);
       fd.append("title", title);
-      await axios.post(`${backEndUrl}/api/books/`, fd, {
+      await axios.post(`${backEndUrl}/auth/books/`, fd, {
         onUploadProgress: (data) => {
           setProgress(Math.round((100 * data.loaded) / data.total));
         },

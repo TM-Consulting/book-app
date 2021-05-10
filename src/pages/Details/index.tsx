@@ -51,7 +51,7 @@ const Details = ({ handleRerunder }: DetailsProps) => {
       fd.append("title", title);
       fd.append("_method", "PUT");
 
-      await axios.post(`${backEndUrl}/api/books/${currentID}`, fd, {
+      await axios.post(`${backEndUrl}/auth/books/${currentID}`, fd, {
         onUploadProgress: (data) => {
           setProgress(Math.round((100 * data.loaded) / data.total));
         },
@@ -63,7 +63,6 @@ const Details = ({ handleRerunder }: DetailsProps) => {
       setRerender(!rerender);
       setShow(false);
       setProgress(null);
-
     }
   };
 

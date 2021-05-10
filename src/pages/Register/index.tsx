@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
+import { addUser } from "../../services/userService";
 
 import "./index.css";
 
@@ -30,14 +31,15 @@ const CreateAccount = () => {
     }
   };
   const handleClick = async (e: any) => {
-    e.preventDefault();
+    console.log("dataa", name, email, password, confirm);
+
     if (name && email && password && confirm) {
       let fd = new FormData();
       fd.append("name", name);
       fd.append("email", email);
       fd.append("password", password);
-      fd.append("confirm", confirm);
-      fd.append("_method", "post");
+      fd.append("password_confirmation", confirm);
+      await addUser(fd);
     }
   };
 
@@ -46,9 +48,9 @@ const CreateAccount = () => {
       <div className="createAccount_container">
         <h5>Create your Account</h5>
         <Form className="createAccount_form">
-        <Form.Group controlId="formBasicName">
-        <Form.Label>Full Name</Form.Label>
-        <Form.Control
+          <Form.Group controlId="formBasicName">
+            <Form.Label>Full Name</Form.Label>
+            <Form.Control
               type="name"
               placeholder="name"
               id="name"
@@ -56,7 +58,7 @@ const CreateAccount = () => {
               onChange={handleChange}
             />
           </Form.Group>
-          <Form.Group controlId="formBasicEmail">
+          <Form.Group>
             <Form.Label>Email address</Form.Label>
             <Form.Control
               type="email"
@@ -70,7 +72,7 @@ const CreateAccount = () => {
             </Form.Text>
           </Form.Group>
 
-          <Form.Group controlId="formBasicPassword">
+          <Form.Group>
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
@@ -80,7 +82,7 @@ const CreateAccount = () => {
               onChange={handleChange}
             />
           </Form.Group>
-          <Form.Group controlId="formBasicPassword">
+          <Form.Group>
             <Form.Label>Confirm Password</Form.Label>
             <Form.Control
               type="password"
@@ -94,8 +96,14 @@ const CreateAccount = () => {
             <Link to="/signin" className="sign_in">
               Sign-In
             </Link>
-            <Button variant="primary" type="submit" onClick={handleClick}>
-              Continue
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={() => {
+                console.log("tttt");
+              }}
+            >
+              Register
             </Button>
           </div>
         </Form>

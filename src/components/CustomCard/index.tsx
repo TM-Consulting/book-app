@@ -12,7 +12,7 @@ const index = ({
     const list_len = imgUrl ? imgUrl.split("/") : [];
     const item = list_len[list_len.length - 1];
     if (item) {
-      if (item.includes("jpg") || item.includes("png")) return false;
+      if (item.includes("jpg") || item.includes("png")|| item.includes("jpeg")) return false;
       else return true;
     } else return false;
   };
