@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button, Col, Form } from 'react-bootstrap';
+import React from "react";
+import { Button, Col, Form } from "react-bootstrap";
 
 const index = ({
   name,
@@ -15,27 +15,44 @@ const index = ({
         <Form.Row>
           <Form.Group as={Col} controlId="formGridEmail">
             <Form.Label>Name</Form.Label>
-            <Form.Control type="text" placeholder="name" value={name} onChange={handleChange} disabled={enable}/>
+            <Form.Control
+              type="text"
+              placeholder="name"
+              value={name}
+              onChange={handleChange}
+              disabled={enable}
+            />
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridPassword">
             <Form.Label>Email</Form.Label>
-            <Form.Control type="Email" placeholder="Email" value={email} onChange={handleChange} disabled={enable} />
+            <Form.Control
+              type="Email"
+              placeholder="Email"
+              value={email}
+              onChange={handleChange}
+              disabled={enable}
+            />
           </Form.Group>
         </Form.Row>
 
-
-        <Form.Row>
+        <Form.Row hidden>
           <Form.Group as={Col} controlId="formGridCity">
             <Form.Label>City</Form.Label>
-            <Form.Control type="text" placeholder="City" value={city} onChange={handleChange} />
+            <Form.Control
+              type="text"
+              placeholder="City"
+              value={city}
+              onChange={handleChange}
+            />
           </Form.Group>
         </Form.Row>
         <Button variant="primary" type="submit" onClick={handleClick}>
-          Edit</Button>
+          Edit
+        </Button>
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export default index
+export default index;
