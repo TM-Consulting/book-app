@@ -10,26 +10,30 @@ import { getAllBooks } from "./services/bookService";
 import SignIn from "./pages/SignIn";
 import CreateAccount from "./pages/CreatAccount";
 import Dashbord from "./pages/Dashbord";
+import { getUser } from "./services/userService";
+import { adduser } from "./actions/userAction";
 const App = () => {
   const dispatch = useDispatch();
+
+  const getCurrentUser = async () => {
+    const recieved = await getUser();
+
+    const authUser = {
+      email: recieved.email,
+      name: recieved.name,
+      isAuth: true,
+      id: recieved.id,
+    };
+    console.log("test user", authUser);
+    dispatch(adduser(authUser));
+  };
   async function fetchMyAPI() {
     const data = await getAllBooks();
     data.reverse();
     dispatch(addBooks(data));
   }
-  // async function CurrentUser() {
-  //   const recieved = await getUser();
-  //   const authUser = {
-  //     email: recieved.user.email,
-  //     name: recieved.user.name,
-  //     isAuth: true,
-  //     id: recieved.user.id,
-  //   };
-  //    dispatch(adduser(authUser));
-  //   dispatch(addBooks(data));
-  // }
-
   useEffect(() => {
+    getCurrentUser();
     fetchMyAPI();
   }, []);
   const handleRerunder = () => {

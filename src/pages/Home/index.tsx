@@ -11,8 +11,10 @@ import { useHistory } from "react-router-dom";
 import { addBook, searchBook } from "../../services/bookService";
 import { addBooks } from "../../actions/bookActions";
 import axios from "axios";
+import { makeSelectCurrentUser } from "../../selectors/userSelector";
 const booksState = createStructuredSelector({
   books: makeSelectBooks(),
+  currentUser: makeSelectCurrentUser(),
 });
 const Home = ({ handleRerunder }: HomeProps) => {
   const [title, setTitle] = useState("");
@@ -21,7 +23,8 @@ const Home = ({ handleRerunder }: HomeProps) => {
   const [image, setImage] = useState("");
   const [progress, setProgress] = useState<number | null>();
   const backEndUrl = process.env.REACT_APP_BACKEND_URL;
-  
+  const history = useHistory();
+  const { books, currentUser } = useSelector(booksState);
   const handleChange = (e: any) => {
     switch (e.target.id) {
       case "title":
@@ -39,11 +42,12 @@ const Home = ({ handleRerunder }: HomeProps) => {
   };
   const handleClick = async (e: any) => {
     e.preventDefault();
-    if (title && description && image) {
+    if (title && description && image && currentUser) {
       let fd = new FormData();
       fd.append("image", image);
       fd.append("description", description);
       fd.append("title", title);
+      fd.append("user_id", `${currentUser.id}`);
       await axios.post(`${backEndUrl}/auth/books/`, fd, {
         onUploadProgress: (data) => {
           setProgress(Math.round((100 * data.loaded) / data.total));
@@ -56,8 +60,7 @@ const Home = ({ handleRerunder }: HomeProps) => {
       handleRerunder();
     }
   };
-  const history = useHistory();
-  const { books } = useSelector(booksState);
+
   const myClick = (e: number) => {
     history.push(`details/${e}`);
   };

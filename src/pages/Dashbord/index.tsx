@@ -1,33 +1,59 @@
-import React from 'react';
+import React, { useEffect } from "react";
 import { Tabs, Tab } from "react-bootstrap";
-import CustomCard from '../../components/CustomCard';
-import Profile from '../../components/Profile';
+import { createStructuredSelector } from "reselect";
+import CustomCard from "../../components/CustomCard";
+import Profile from "../../components/Profile";
+import { makeSelectCurrentUser } from "../../selectors/userSelector";
+import { getUserBooks } from "../../services/userService";
+import { addBooks } from "../../actions/bookActions";
+import { useDispatch, useSelector } from "react-redux";
+import { makeSelectBooks } from "../../selectors/bookSelector";
 
-const index = () => {
+const userState = createStructuredSelector({
+  curentUser: makeSelectCurrentUser(),
+  books: makeSelectBooks(),
+});
+const Dashboard = () => {
+  const { curentUser, books } = useSelector(userState);
+  const dispatch = useDispatch();
+  async function fetchMyAPI() {
+    if (curentUser) {
+      const data = await getUserBooks(curentUser.id);
+      data.reverse();
+      dispatch(addBooks(data));
+    }
+  }
+  useEffect(() => {
+    fetchMyAPI();
+  }, [curentUser]);
   return (
-    <div className="container">
-      <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-        <Tab eventKey="profile" title="Profile">
-          <Profile name={"Mohamed Bataoui"} email={"Mohamed.bataoui@gmail.com"} city={"Mohammedia"} handleChange={() => { }} handleClick={() => { }} />
-        </Tab>
-        <Tab eventKey="home" title="Home">
-          <CustomCard
-            imgUrl={"https://images.unsplash.com/photo-1620400557579-93560a77987c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80"}
-            showBtn={true}
-            title={"Monaim touanssi"}
-            description={"developpeur web"}
-            handleClick={() => { }} />
-          <CustomCard
-            imgUrl={"https://images.unsplash.com/photo-1620400557579-93560a77987c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80"}
-            showBtn={true}
-            title={"Monaim touanssi"}
-            description={"developpeur web"}
-            handleClick={() => { }} />
+    curentUser && (
+      <div className="container">
+        <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+          <Tab eventKey="profile" title="Profile">
+            <Profile
+              name={curentUser.name}
+              email={curentUser.email}
+              city={"Mohammedia"}
+              handleChange={() => {}}
+              handleClick={() => {}}
+            />
+          </Tab>
+          <Tab eventKey="home" title="Home">
+            {books.map((item) => (
+              <CustomCard
+                imgUrl={item.image_id}
+                showBtn={true}
+                title={item.title}
+                description={item.description}
+                handleClick={() => {}}
+              />
+            ))}
+          </Tab>
+        </Tabs>
+      </div>
+    )
+  );
+};
 
-        </Tab>
-      </Tabs>
-    </div>
-  )
-}
-
-export default index
+export default Dashboard;

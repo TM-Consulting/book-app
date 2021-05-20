@@ -5,9 +5,9 @@ import { globalState, userState } from "../types";
 const selectBookDomain = (glstate: globalState): userState =>
   glstate.UsersStateFE || initialUserState;
 
-const makeSelectBooks = () =>
+const makeSelectCurrentUser = () =>
   createSelector(selectBookDomain, (data: userState) =>
     data && "user" in data ? data.user : null
   );
 
-export { makeSelectBooks, selectBookDomain };
+export { makeSelectCurrentUser, selectBookDomain };
