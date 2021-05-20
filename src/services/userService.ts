@@ -8,8 +8,18 @@ export const addUser = async (data: FormData) => {
 export const userLogin = async (data: FormData) => {
   var received: any = null;
   await axios.post(`${backEndUrl}/auth/login`, data).then((res) => {
-    console.log("testtttt", res.data);
     received = res.data;
   });
+  return received;
+};
+export const getUser = async () => {
+  var received: any = null;
+  await axios
+    .post(`${backEndUrl}/auth/user-profile`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("jwt-token")}` },
+    })
+    .then((res) => {
+      received = res.data;
+    });
   return received;
 };

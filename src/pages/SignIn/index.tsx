@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { adduser } from "../../actions/userAction";
 import { userLogin } from "../../services/userService";
 import "./index.css";
 
 const SignIn = () => {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const backEndUrl = process.env.REACT_APP_BACKEND_URL;
@@ -39,6 +40,7 @@ const SignIn = () => {
         id: recieved.user.id,
       };
       dispatch(adduser(authUser));
+      history.push("./dashboard");
     }
   };
 

@@ -7,8 +7,8 @@ import { addBooks } from "./actions/bookActions";
 import { useDispatch } from "react-redux";
 import Details from "./pages/Details";
 import { getAllBooks } from "./services/bookService";
-import SignIn from './pages/SignIn'
-import CreateAccount from './pages/CreatAccount'
+import SignIn from "./pages/SignIn";
+import CreateAccount from "./pages/CreatAccount";
 import Dashbord from "./pages/Dashbord";
 const App = () => {
   const dispatch = useDispatch();
@@ -17,6 +17,17 @@ const App = () => {
     data.reverse();
     dispatch(addBooks(data));
   }
+  // async function CurrentUser() {
+  //   const recieved = await getUser();
+  //   const authUser = {
+  //     email: recieved.user.email,
+  //     name: recieved.user.name,
+  //     isAuth: true,
+  //     id: recieved.user.id,
+  //   };
+  //    dispatch(adduser(authUser));
+  //   dispatch(addBooks(data));
+  // }
 
   useEffect(() => {
     fetchMyAPI();
@@ -40,7 +51,7 @@ const App = () => {
           <Route path="/signup" exact>
             <CreateAccount />
           </Route>
-           <Route path="/dashboard" exact>
+          <Route path="/dashboard" exact>
             <Dashbord />
           </Route>
         </Switch>
